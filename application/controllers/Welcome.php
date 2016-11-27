@@ -8,6 +8,14 @@ class Welcome extends CI_Controller {
 	}
 	
 	public function index() {
+		// Migrer la base de données.
+		$this->load->library('migration');
+		if (!$this->migration->latest())
+		{
+			// show_error($this->migration->error_string());
+			return;
+		}
+
 		$this->load->view('templates/header');
 		if($this->session->userdata('logged_in'))
 		{
